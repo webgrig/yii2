@@ -11,7 +11,29 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'main' => [
+            'class' => 'app\modules\main\Module',
+        ],
+    ],
     'components' => [
+        'mail' => [
+            'class'            => 'zyx\phpmailer\Mailer',
+            'viewPath'         => '@common/mail',
+            'useFileTransport' => false,
+            'config'           => [
+                'mailer'     => 'smtp',
+                'host'       => 'smtp.gmail.com',
+                'port'       => '465',
+                'smtpsecure' => 'ssl',
+                'smtpauth'   => true,
+                'username'   => 'grigoriev.ua@gmail.com',
+                'password'   => 'gryg41312391',
+            ],
+        ],
+        'common' => [
+            'class' => 'frontend\components\Common',
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],

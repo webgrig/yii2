@@ -12,6 +12,10 @@ class ComposerStaticInit88a937f8458c9641a5f574900bf823c7
     );
 
     public static $prefixLengthsPsr4 = array (
+        'z' => 
+        array (
+            'zyx\\phpmailer\\' => 14,
+        ),
         'y' => 
         array (
             'yii\\swiftmailer\\' => 16,
@@ -34,6 +38,10 @@ class ComposerStaticInit88a937f8458c9641a5f574900bf823c7
     );
 
     public static $prefixDirsPsr4 = array (
+        'zyx\\phpmailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zyx/zyx-phpmailer',
+        ),
         'yii\\swiftmailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
@@ -93,12 +101,20 @@ class ComposerStaticInit88a937f8458c9641a5f574900bf823c7
         ),
     );
 
+    public static $classMap = array (
+        'PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
+        'POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.pop3.php',
+        'SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.smtp.php',
+        'phpmailerException' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit88a937f8458c9641a5f574900bf823c7::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit88a937f8458c9641a5f574900bf823c7::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit88a937f8458c9641a5f574900bf823c7::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit88a937f8458c9641a5f574900bf823c7::$classMap;
 
         }, null, ClassLoader::class);
     }
