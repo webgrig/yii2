@@ -21,6 +21,17 @@ use yii\bootstrap\Nav;
 
 <body>
 <?php $this->beginBody() ?>
+<?php if (Yii::$app->session->hasFlash('success')): ?>
+    <?php
+        echo \yii\bootstrap\Alert::widget([
+            'options' => [
+                'class' => 'alert-info'
+            ],
+            'body' => Yii::$app->session->getFlash('success')
+        ]);
+
+    ?>
+<?php endif;?>
 <?=$this->render('//common/header')?>
 <?=$content ?>
 <?=$this->render('//common/footer')?>

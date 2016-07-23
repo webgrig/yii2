@@ -2,6 +2,7 @@
 
 namespace app\modules\main\controllers;
 
+use common\models\LoginForm;
 use frontend\models\ContactForm;
 use frontend\models\SignupForm;
 use yii\web\Controller;
@@ -35,16 +36,58 @@ class MainController extends Controller
         $model = new SignupForm();
 
         if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost){
-            \Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
+            if($model->load(\Yii::$app->request->post())){
+                \Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+            return false;
         }
 
-        if ($model->load(\Yii::$app->request->post())){
-            print_r($model->getAttributes());
-            die();
+        if ($model->load(\Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (\Yii::$app->getUser()->login($user)) {
+                    \Yii::$app->session->setFlash('success', 'Register Success');
+                    return $this->goHome();
+                }
+            }
         }
-        return $this->render('register', ['model' => $model]);
+        return $this->render('register', [
+            'model' => $model,
+        ]);
 
+    }
+
+    /**
+     * Logs in a user.
+     *
+     * @return mixed
+     */
+    public function actionLogin()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $model = new LoginForm();
+        if ($model->load(\Yii::$app->request->post()) && $model->login()) {
+            \Yii::$app->session->setFlash('success', 'Login Success');
+            return $this->goBack();
+        } else {
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Logs out the current user.
+     *
+     * @return mixed
+     */
+    public function actionLogout()
+    {
+        \Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 
     public function actionContact(){

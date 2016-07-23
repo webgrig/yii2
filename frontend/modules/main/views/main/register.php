@@ -2,8 +2,8 @@
     <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 ">
 
         <?php $form = \yii\bootstrap\ActiveForm::begin([
-            'enableClientValidation' => true,
-            'enableAjaxValidation' => false
+            'enableClientValidation' => false,
+            'enableAjaxValidation' => true,
         ]); ?>
             <?php echo $form->field($model, 'username')->textInput(['placeholder' => 'Full Name'])->label(false)?>
             <?php echo $form->field($model, 'email')->textInput(['placeholder' => 'Enter Email'])->label(false)?>
