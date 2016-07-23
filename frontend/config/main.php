@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'main',
     'modules' => [
         'main' => [
             'class' => 'app\modules\main\Module',
@@ -27,8 +28,10 @@ return [
                 'port'       => '465',
                 'smtpsecure' => 'ssl',
                 'smtpauth'   => true,
-                'username'   => 'grigoriev.ua@gmail.com',
-                'password'   => 'gryg41312391',
+                'username'   => 'grigoriev.ua',
+                'password'   => '41312391gryg',
+                'isHtml'     => true,
+                'charset'    => 'UTF-8',
             ],
         ],
         'common' => [
